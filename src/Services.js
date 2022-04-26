@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-//import Checkbox from './Checkbox.js'
+import Panell from './Panell'
 
-export default function Services(props){
+export default function Services(){
 
     const [formData, setFormData] = useState({
         isWeb: false,
@@ -19,7 +19,7 @@ export default function Services(props){
             sumaTotal = parseInt(parseInt(suma) - parseInt(event.target.value));
 
         }
-        const {name, value, type, checked, price} = event.target
+        const {name, value, type, checked} = event.target
         setSuma(sumaTotal)
         setFormData(prevFormData => {
             return{
@@ -38,16 +38,17 @@ export default function Services(props){
              value="500" 
              name="isseb" 
              onChange={handleClick}
-             checked={formData.isseb} /> 
+             defaultChecked={formData.isseb} /> 
              <label htmlFor="email">Web: 500€</label>
           <br /> 
+          < Panell />
             
             <input 
             type="checkbox" 
             value="300" 
             name="isseo" 
             onChange={handleClick} 
-            checked={formData.isseo}/> 
+            defaultChecked={formData.isseo}/> 
             <label htmlFor="email">Consultoria SEO: 300€</label>
           <br />
   
@@ -56,7 +57,7 @@ export default function Services(props){
             value="200" 
             name="isads" 
             onChange={handleClick} 
-            checked={formData.isads}/> 
+            defaultChecked={formData.isads}/> 
             <label htmlFor="email">Google ADS: 200€</label>
 
             </form>
