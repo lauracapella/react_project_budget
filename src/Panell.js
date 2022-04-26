@@ -11,7 +11,7 @@ export default function Panell (){
 
 
 
-        
+
         const {type, name, value} = event.target
         setFormData(prevFormData => {
             return{

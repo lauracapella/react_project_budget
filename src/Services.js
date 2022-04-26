@@ -19,6 +19,7 @@ export default function Services(){
             sumaTotal = parseInt(parseInt(suma) - parseInt(event.target.value));
 
         }
+        
         const {name, value, type, checked} = event.target
         setSuma(sumaTotal)
         setFormData(prevFormData => {
