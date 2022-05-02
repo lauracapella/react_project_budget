@@ -1,26 +1,16 @@
-import React, {useState} from "react";
-
-export default function Panell (){
-    const [formData, setFormData] = useState({
-        pages:'',
-        lenguages:''})
-    const sumaAdicionalTotal =  (formData.pages * 30) + (formData.lenguages * 30)
-
-    function selectpages (event){
-        props.updatePages(event.target.value)
+import React from "react";
+import styled from "styled-components"
 
 
+export const Panell2 = styled.div`
+border-radius: 10px;
+border: 3px solid black;
+padding:10px;
+margin: 10px;
+width: 300px
+`
 
-
-        const {type, name, value} = event.target
-        setFormData(prevFormData => {
-            return{
-             ... prevFormData,
-            [event.target.name] : event.target.value
-            }
-        }) 
-    }
-
+export default function Panell (props, {onChange, placeholder}){
 
     return(
         <div>
@@ -28,20 +18,18 @@ export default function Panell (){
             <input 
                 type='text' 
                 name='pages'
-                value={formData.pages}
-                placeholder='page'
-                onChange={selectpages}
-                
+                value={props.pages}
+                placeholder='nº pages'
+                onChange={props.onChange}
             /> <br/>
             <label>Nº lenguages</label>
             <input 
                 type='text' 
                 name='lenguages'
-                value={formData.lenguages}
-                placeholder='lang'
-                onChange={selectpages}
+                value={props.lenguages}
+                placeholder='nº languages'
+                onChange={props.onChange}
             />
-           <p>Precio adicional = {sumaAdicionalTotal} €</p>
         </div>
     )
 }
