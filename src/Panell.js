@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components"
 
 
@@ -10,18 +10,42 @@ margin: 10px;
 width: 300px
 `
 
-export default function Panell (props, {onChange, placeholder}){
+export default function Panell (props){
+    
+      
 
     return(
         <div>
+            <button onClick={props.onClick}>+</button>
+            <p>{props.count}</p>
+            <input
+          type="number"
+          name = "pages"
+          //onChange={(e) => props.updateBudget("pages", e.target.value)}
+          onChange={props.onChange}
+          //defaultChecked={props.budget.pages}
+        />
+        <br />
+        <input
+          type="number"
+          name = "lenguages"
+          //onChange={(e) => props.updateBudget("languages", e.target.value)}
+          onChange={props.onChange}
+          //defaultChecked={props.budget.pages}
+        />
+        <br />
+        </div>
+       /*  <div>
             <label>Nº pages</label>
+            <button onClick={contadorMas}> + </button>
             <input 
                 type='text' 
                 name='pages'
                 value={props.pages}
                 placeholder='nº pages'
                 onChange={props.onChange}
-            /> <br/>
+            /> <button onClick={props.onClick}> - </button>
+            <input type="number" value={quantity} onChange={updatePages} /><br/>
             <label>Nº lenguages</label>
             <input 
                 type='text' 
@@ -30,6 +54,8 @@ export default function Panell (props, {onChange, placeholder}){
                 placeholder='nº languages'
                 onChange={props.onChange}
             />
-        </div>
+            <div>
+   </div>
+        </div> */
     )
 }
