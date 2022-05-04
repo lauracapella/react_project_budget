@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import Panell from "./Panell";
 import { Panell2 } from "./Panell";
+import PanellPrueba from "./PanellPrueba";
 
 function App(props) {
   /* Modelo de datos */
@@ -13,12 +14,9 @@ function App(props) {
     lenguages: 1,
   });
   const [total, setTotal] = useState(0);
-  const [count, setCount] = useState(0)
-        
-  const contadorMas = (e) => {
-    setCount(count => count + 1)
-    alert(count);
-  }
+
+
+  /* const [count, setCount] = useState(1); */
 
   /* Lógica */
   /* 1. Modificar state */
@@ -26,6 +24,7 @@ function App(props) {
     let newBudget = { ...budget };
     newBudget[field] = value;
     setBudget(newBudget);
+    //console.log(newBudget.pages );
   };
 
   /* 2. Calcular total */
@@ -33,15 +32,24 @@ function App(props) {
     calculateTotal();
   }, [budget]);
 
+ /*  const contador = (e) => {
+    setCount((count) => count + 1);
+    //1. budget.pages = count + 1;
+    setBudget((prevBudget) => {
+      return { ...prevBudget, pages: count + 1 };
+    });
+  }; */
+
   const calculateTotal = () => {
-   let newTotal = 
-   (budget.isweb? 500 : 0) 
-   + (budget.isseo? 300 : 0) 
-   + (budget.pages > 1 && budget.isweb ? (budget.pages-1) * 30 : 0)
-   + (budget.lenguages > 1 && budget.isweb? (budget.lenguages-1) * 30 : 0)
-   +  (budget.isads? 200 : 0);
-   setTotal(newTotal)
-   //alert('total:' + newTotal)
+    let newTotal =
+      (budget.isweb ? 500 : 0) +
+      (budget.isseo ? 300 : 0) +
+      (budget.pages > 1 && budget.isweb ? (budget.pages - 1) * 30 : 0) +
+      (budget.lenguages > 1 && budget.isweb ? (budget.lenguages - 1) * 30 : 0) +
+      (budget.isads ? 200 : 0);
+    setTotal(newTotal);
+
+    //alert('total:' + newTotal)
   };
 
   return (
@@ -56,8 +64,23 @@ function App(props) {
           defaultChecked={budget.isweb}
         />
         <label htmlFor="email">Web</label>
-        {budget.isweb ? <Panell2><Panell onChange={(e) => updateBudget(e.target.name , e.target.value)} onClick={(e) => contadorMas()}/>  </Panell2> : <span></span>}
+        {budget.isweb ? (
+          <Panell2>
+            {/* <Panell
+              onChange={(e) => updateBudget(e.target.name, e.target.value)}
+              onClick={(e) => contador()}
+              defaultValue={budget.pages}
+            /> */}
+          
+            <PanellPrueba
+              updateBudget={updateBudget}
+              budget={budget}
+            />
 
+          </Panell2>
+        ) : (
+          <span></span>
+        )}
         <br />
         <input
           type="checkbox"
@@ -67,7 +90,6 @@ function App(props) {
           defaultChecked={budget.isseo}
         />
         <label htmlFor="email">Seo</label>
-
 
         <br />
         <input

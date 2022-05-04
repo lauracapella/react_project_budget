@@ -11,20 +11,20 @@ width: 300px
 `
 
 export default function Panell (props){
-    
-      
-
     return(
         <div>
-            <button onClick={props.onClick}>+</button>
-            <p>{props.count}</p>
-            <input
+          <button onClick={props.onClick} onChange={props.onChange} value = "add" >+</button>
+            {/* <button onClick={props.onClick} name='suma' >+</button> */}
+          <input
           type="number"
           name = "pages"
           //onChange={(e) => props.updateBudget("pages", e.target.value)}
           onChange={props.onChange}
+          value= {props.defaultValue}        
           //defaultChecked={props.budget.pages}
-        />
+        />            
+        <button onClick={props.onClick} value = "substract" >--</button>
+
         <br />
         <input
           type="number"
