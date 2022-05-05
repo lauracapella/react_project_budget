@@ -30,6 +30,7 @@ function App(props) {
   /* 2. Calcular total */
   useEffect(() => {
     calculateTotal();
+    localStorage.setItem('budget', JSON.stringify(budget))
   }, [budget]);
 
  /*  const contador = (e) => {
