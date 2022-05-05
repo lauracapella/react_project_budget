@@ -1,8 +1,6 @@
-//import "../App.css";
 import React, { useEffect, useState } from "react";
-//import Panell from "./Panell";
+import Panell from "../Panell";
 import { Panell2 } from "../Panell";
-import PanellPrueba from "../PanellPrueba";
 
 function Budget(props) {
   /* Modelo de datos */
@@ -15,31 +13,28 @@ function Budget(props) {
   });
   const [total, setTotal] = useState(0);
 
-
-  /* const [count, setCount] = useState(1); */
-
   /* Lógica */
+ /*  0. Inicializacion */
+ useEffect(() => {
+  let newBudget = JSON.parse(localStorage.getItem('budget'))
+  if(newBudget){
+    setBudget(newBudget);
+    calculateTotal();
+  }
+  }, []);
+
   /* 1. Modificar state */
   const updateBudget = (field, value) => {
     let newBudget = { ...budget };
     newBudget[field] = value;
     setBudget(newBudget);
-    //console.log(newBudget.pages );
+    localStorage.setItem('budget', JSON.stringify(budget))
   };
 
   /* 2. Calcular total */
   useEffect(() => {
     calculateTotal();
-    localStorage.setItem('budget', JSON.stringify(budget))
   }, [budget]);
-
- /*  const contador = (e) => {
-    setCount((count) => count + 1);
-    //1. budget.pages = count + 1;
-    setBudget((prevBudget) => {
-      return { ...prevBudget, pages: count + 1 };
-    });
-  }; */
 
   const calculateTotal = () => {
     let newTotal =
@@ -49,8 +44,6 @@ function Budget(props) {
       (budget.lenguages > 1 && budget.isweb ? (budget.lenguages - 1) * 30 : 0) +
       (budget.isads ? 200 : 0);
     setTotal(newTotal);
-
-    //alert('total:' + newTotal)
   };
 
   return (
@@ -67,17 +60,10 @@ function Budget(props) {
         <label htmlFor="email">Web</label>
         {budget.isweb ? (
           <Panell2>
-            {/* <Panell
-              onChange={(e) => updateBudget(e.target.name, e.target.value)}
-              onClick={(e) => contador()}
-              defaultValue={budget.pages}
-            /> */}
-          
-            <PanellPrueba
+            <Panell
               updateBudget={updateBudget}
               budget={budget}
             />
-
           </Panell2>
         ) : (
           <span></span>
@@ -91,7 +77,6 @@ function Budget(props) {
           defaultChecked={budget.isseo}
         />
         <label htmlFor="email">Seo</label>
-
         <br />
         <input
           type="checkbox"
@@ -107,5 +92,4 @@ function Budget(props) {
     </>
   );
 }
-
 export default Budget;
